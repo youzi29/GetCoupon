@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, width=device-width, viewport-fit=cover" />
+
+    <script type="text/javascript">
+    !function(e,t){function n(){var n=l.getBoundingClientRect().width;t=t||540,n>t&&(n=t);var i=100*n/e;r.innerHTML="html{font-size:"+i+"px;}"}var i,d=document,o=window,l=d.documentElement,r=document.createElement("style");if(l.firstElementChild)l.firstElementChild.appendChild(r);else{var a=d.createElement("div");a.appendChild(r),d.write(a.innerHTML),a=null}n(),o.addEventListener("resize",function(){clearTimeout(i),i=setTimeout(n,300)},!1),o.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(i),i=setTimeout(n,300))},!1),"complete"===d.readyState?d.body.style.fontSize="16px":d.addEventListener("DOMContentLoaded",function(e){d.body.style.fontSize="16px"},!1)}(1080,640);
+    </script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=c84e2ec4fe5a3d3e32ada01b9288bba8&plugin=AMap.CitySearch"></script>
+    <script type="text/javascript">
+        var map = new AMap.Map('mapContainer', {
+           resizeEnable: true
+        })
+
+        map.plugin('AMap.Geolocation', function() {
+            var geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true,
+                timeout: 10000,
+                buttonOffset: new AMap.Pixel(10, 20),
+                zoomToAccuracy: true,
+                buttonPosition: 'RB'
+             })
+            geolocation.getCurrentPosition();
+            AMap.event.addListener(geolocation, 'complete', onComplete);
+            AMap.event.addListener(geolocation, 'error', onError);
+
+            function onComplete (data) {
+                addComp = data.addressComponent;
+                console.log(addComp.city);
+                alert(addComp.city);
+            }
+
+            function onError (error) {
+                console.log(error)
+            }
+        })
+    </script>
+    <link rel="stylesheet" href="static/base.css">
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <title>img</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+
+</html>
